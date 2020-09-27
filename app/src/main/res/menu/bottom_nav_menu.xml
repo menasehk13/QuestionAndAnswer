@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:title="@string/questions" android:icon="@drawable/ic_baseline_menu_book_24" android:id="@+id/questions"/>
+    <item android:title="@string/myquestions" android:id="@+id/myquestions" android:icon="@drawable/ic_baseline_question_answer_24"/>
+    <item android:icon="@drawable/ic_baseline_account_circle_small" android:title="@string/profile" android:id="@+id/profile_user"/>
+</menu>

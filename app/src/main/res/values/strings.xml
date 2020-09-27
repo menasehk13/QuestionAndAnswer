@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">QuestionAndAnswer</string>
+    <string name="email">Email</string>
+    <string name="password">password</string>
+    <string name="login">Login</string>
+    <string name="here">HERE</string>
+    <string name="new_to_this_app">New To this App?</string>
+    <string name="register">Register</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="gender">Gender</string>
+    <string name="birthday">Birthday</string>
+    <string name="lastname">Lastname</string>
+    <string name="firstname">Firstname</string>
+    <string name="profile">profile</string>
+    <string name="questions">Questions</string>
+    <string name="myquestions">MyQuestions</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logout">LogOut</string>
+    <string name="name">Name</string>
+    <string name="question">Question</string>
+    <string name="type">Type</string>
+    <string name="time">Time</string>
+</resources>
