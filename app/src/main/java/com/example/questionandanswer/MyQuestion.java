@@ -1,6 +1,7 @@
 package com.example.questionandanswer;
 
 public class MyQuestion {
+
     String Question;
     String Time;
     String Type;
@@ -8,6 +9,7 @@ public class MyQuestion {
     String username;
 
     public MyQuestion(String question, String time, String type, String imageurl, String username) {
+
         this.Question = question;
         this.Time = time;
         this.Type = type;

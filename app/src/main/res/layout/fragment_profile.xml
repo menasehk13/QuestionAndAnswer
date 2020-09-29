@@ -13,7 +13,8 @@
         android:background="@drawable/image_holder"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        />
  <com.google.android.material.textfield.TextInputLayout
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
@@ -35,7 +36,8 @@
          android:drawableStart="@drawable/ic_baseline_account_circle_small"
          android:background="@android:color/transparent"
          android:importantForAutofill="no"
-         tools:ignore="LabelFor" />
+         tools:ignore="LabelFor"
+         />
  </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
@@ -58,7 +60,8 @@
             android:drawableStart="@drawable/ic_baseline_email_24"
             android:background="@android:color/transparent"
             android:importantForAutofill="no"
-            tools:ignore="LabelFor" />
+            tools:ignore="LabelFor"
+            />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"

@@ -51,6 +51,7 @@ public class MyQuestions extends Fragment {
                 startActivity(new Intent(getContext(),AddQuestion.class));
             }
         });
+
         FirebaseAuth auth=FirebaseAuth.getInstance();
         String user=auth.getCurrentUser().getUid();
         FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
