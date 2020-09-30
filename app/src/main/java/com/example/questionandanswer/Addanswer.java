@@ -128,6 +128,7 @@ public class Addanswer extends AppCompatActivity {
                 InputMethodManager inputManager = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
 
+
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -165,7 +166,7 @@ public class Addanswer extends AppCompatActivity {
                                                        public void onComplete(@NonNull Task<Void> task) {
                                                         if (task.isSuccessful()){
                                                             Toast.makeText(Addanswer.this, "Added Question", Toast.LENGTH_SHORT).show();
-
+                                                            addanswer.getText().clear();
                                                         }
                                                        }
                                                    });
