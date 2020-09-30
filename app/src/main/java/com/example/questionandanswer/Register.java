@@ -33,6 +33,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -61,6 +63,7 @@ private int PICK_IMAGE=99;
 RadioGroup group;
 Uri uri;
 SweetAlertDialog sweetAlertDialog;
+String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +81,12 @@ SweetAlertDialog sweetAlertDialog;
         firebaseFirestore=FirebaseFirestore.getInstance();
         storage=FirebaseStorage.getInstance();
         auth=FirebaseAuth.getInstance();
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+               token=task.getResult().getToken();
+            }
+        });
         birthdate.setInputType(InputType.TYPE_NULL);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,6 +176,7 @@ SweetAlertDialog sweetAlertDialog;
                                                map.put("BirthDay",mbirthdate);
                                                map.put("Gender",mgender);
                                                map.put("ImageUrl",imageurl);
+                                               map.put("token",token);
                                                reference.set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                    @Override
                                                    public void onComplete(@NonNull Task<Void> task) {

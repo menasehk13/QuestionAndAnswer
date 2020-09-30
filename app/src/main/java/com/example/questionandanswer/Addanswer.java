@@ -31,12 +31,18 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Addanswer extends AppCompatActivity {
     TextView questionof,time,type;
@@ -50,9 +56,11 @@ public class Addanswer extends AppCompatActivity {
     String user;
     String imageurl;
     String keyof;
+    String Token;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     FirebaseAuth auth;
+    private ApiInterface apiInterface;
     private static String TAG="VALUESSS";
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
@@ -68,7 +76,7 @@ public class Addanswer extends AppCompatActivity {
         send = findViewById(R.id.button_send);
         final String ques = getIntent().getStringExtra("Questiion");
         final String timequestion = getIntent().getStringExtra("Time");
-        String typequestion = getIntent().getStringExtra("Type");
+        final String typequestion = getIntent().getStringExtra("Type");
         questionof.setText(ques);
         time.setText(timequestion);
         type.setText(typequestion);
@@ -143,13 +151,25 @@ public class Addanswer extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot snapshot2) {
                                     for (DataSnapshot snapshot1:snapshot2.getChildren()){
                                         final String innerkey=snapshot1.getKey();
+                                        DatabaseReference Databse2=databaseReference.child(key).child(innerkey).child("token");
+                                        Databse2.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                               Token=snapshot.getValue().toString();
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
                                         DocumentReference documentReference=FirebaseFirestore.getInstance().collection("Users").document(user);
                                         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                             @Override
                                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                                 DocumentSnapshot documentSnapshot=task.getResult();
                                                 if (documentSnapshot.exists()) {
-                                                    String answerusername,imageusrl,answer,timeofanswer;
+                                                    final String answerusername,imageusrl,answer,timeofanswer;
                                                     answerusername=documentSnapshot.get("FirstName").toString();
                                                     imageusrl=documentSnapshot.get("ImageUrl").toString();
                                                     answer=addanswer.getText().toString();
@@ -165,8 +185,9 @@ public class Addanswer extends AppCompatActivity {
                                                        @Override
                                                        public void onComplete(@NonNull Task<Void> task) {
                                                         if (task.isSuccessful()){
-                                                            Toast.makeText(Addanswer.this, "Added Question", Toast.LENGTH_SHORT).show();
+                                                            Toast.makeText(Addanswer.this, "Added Answer", Toast.LENGTH_SHORT).show();
                                                             addanswer.getText().clear();
+                                                            SendChatNotification(Token,typequestion,answer);
                                                         }
                                                        }
                                                    });
@@ -193,5 +214,29 @@ public class Addanswer extends AppCompatActivity {
             }
         });
 
+    }
+    public void SendChatNotification(String to,String title,String body){
+        DataModel dataModel=new DataModel(title,body);
+        RequestNotification requestNotification=new RequestNotification(to,dataModel);
+        apiInterface=ApiClient.getRetrofit().create(ApiInterface.class);
+        Call<ResponseBody> responseBodyCall=apiInterface.SendChatNotification(requestNotification);
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.code()==200){
+                    try {
+                        Log.d(TAG, "onResponse: "+response.body().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Log.d(TAG, "onResponse: "+response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+            }
+        });
     }
 }

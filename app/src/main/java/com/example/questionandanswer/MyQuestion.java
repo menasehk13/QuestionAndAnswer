@@ -7,18 +7,21 @@ public class MyQuestion {
     String Type;
     String imageurl;
     String username;
+    String token;
 
-    public MyQuestion(String question, String time, String type, String imageurl, String username) {
+    public MyQuestion(String question, String time, String type, String imageurl, String username,String token) {
 
         this.Question = question;
         this.Time = time;
         this.Type = type;
         this.imageurl = imageurl;
         this.username = username;
+        this.token=token;
     }
 public MyQuestion(){
 
 }
+
     public String getQuestion() {
         return Question;
     }
@@ -57,5 +60,13 @@ public MyQuestion(){
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
