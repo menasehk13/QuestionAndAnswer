@@ -185,7 +185,7 @@ String token;
                                                          sweetAlertDialog.setConfirmButton("Continue", new SweetAlertDialog.OnSweetClickListener() {
                                                              @Override
                                                              public void onClick(SweetAlertDialog sweetAlertDialog) {
-                                                                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                                                 startActivity(new Intent(getApplicationContext(),Viewpager.class));
                                                                  finish();
                                                              }
                                                          });

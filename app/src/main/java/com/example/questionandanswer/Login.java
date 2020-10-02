@@ -33,6 +33,7 @@ public class Login extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser();
         if (user!=null){
+
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
             finish();
         }
