@@ -3,112 +3,157 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#919FF4"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:layout_width="414dp"
-        android:layout_height="88dp"
-        android:background="@drawable/edit_text_box"
-        android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:transitionName="cardview"
+        app:cardBackgroundColor="#19154E"
+        app:cardElevation="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/scroll"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/scroll">
-
-        <TextView
-            android:id="@+id/question_oftoanswer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="12dp"
-            android:paddingStart="13dp"
-            android:text="@string/question"
-            android:textSize="18dp"
-            tools:ignore="RtlSymmetry" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:background="@android:color/black" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="392dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="22dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/type" />
+            <ImageView
+                android:id="@+id/image_oftheselectedquestion"
+                android:layout_width="77dp"
+                android:layout_height="76dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/small_cirlce"
+                tools:ignore="ContentDescription" />
 
-            <TextView
-                android:id="@+id/type_question"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:ellipsize="end"
-                android:maxLines="12"
-                android:text="@string/type" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:text="@string/time" />
+                android:layout_marginEnd="15dp"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/time_ofquestion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/time" />
+                <TextView
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/usernameofquestion1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="24dp"
+                    android:text="@string/name"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:transitionName="username" />
 
+                <TextView
+                    android:id="@+id/usernameofquestion2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/question_oftoanswer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:maxLines="10"
+                    android:minLines="4"
+                    android:padding="5dp"
+                    android:lines="4"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:text="@string/question"
+                    android:textColor="@android:color/white"
+                    android:textSize="19sp"
+                    android:transitionName="questiontrns" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:id="@+id/answersize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:text="0"
+                        android:textColor="@android:color/white" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_baseline_message_24"
+                        tools:ignore="ContentDescription" />
+                </LinearLayout>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="519dp"
         android:id="@+id/scroll"
-        app:layout_constraintBottom_toTopOf="@id/linear">
+        android:layout_width="0dp"
+        android:layout_height="409dp"
+        app:layout_constraintBottom_toTopOf="@id/layout_chatbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="12dp"
             android:id="@+id/addanswer_Recycle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </ScrollView>
-    <LinearLayout
-        android:id="@+id/linear"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_margin="6dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:weightSum="3"
-        android:background="@drawable/edit_box">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:inputType="textImeMultiLine"
-
-            android:paddingStart="13dp"
-            android:id="@+id/addanswer"
-            android:background="@android:color/transparent"
-            android:importantForAutofill="no"
-            tools:ignore="LabelFor,RtlSymmetry" />
-        <Button
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="#919FF4" />
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout_chatbox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:minHeight="48dp"
+        android:background="#3545A7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <EditText
+            android:id="@+id/addanswer"
+            android:hint="Enter Answer"
+            android:background="@android:color/transparent"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:inputType="text"
+            android:layout_width="0dp"
             android:layout_weight="1"
+            android:textColorHint="@android:color/white"
+            android:layout_height="wrap_content"
+            android:maxLines="6"/>
+
+        <Button
             android:id="@+id/button_send"
-            android:background="@drawable/ic_baseline_send_24"/>
+            android:text="SEND"
+            android:textSize="14dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:textColor="#B09A9A"
+            android:layout_width="64dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:layout_gravity="bottom" />
+
     </LinearLayout>
-   </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

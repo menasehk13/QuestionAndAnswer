@@ -3,6 +3,7 @@ package com.example.questionandanswer;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,13 +19,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
 public class AnswerView extends AppCompatActivity {
-    TextView question,time,type;
+    TextView question,username,username2,count_answer;
     RecyclerView recyclerView;
+    ImageView imageView;
     List<AnswerDetail> answerDetailList=new ArrayList<>();
     AnswerAdapters answerAdapters;
     FirebaseDatabase database;
@@ -34,13 +39,11 @@ public class AnswerView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answerview);
         question=findViewById(R.id.question_oftheselected);
-        time=findViewById(R.id.time_Added);
-        type=findViewById(R.id.type_ofthequestion);
         final String quest=getIntent().getStringExtra("Questiion");
-        String typeof=getIntent().getStringExtra("Type");
+        imageView=findViewById(R.id.imagefor);
+        username=findViewById(R.id.username1);
+        username2=findViewById(R.id.username2);
         question.setText(quest);
-        time.setText(getIntent().getStringExtra("Time"));
-        type.setText(typeof);
         recyclerView=findViewById(R.id.recycle_answer);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         database=FirebaseDatabase.getInstance();
@@ -75,6 +78,32 @@ public class AnswerView extends AppCompatActivity {
 
                                     }
                                 });
+                                DatabaseReference username1=databaseReference.child(keykey).child(key2).child("username");
+                                username1.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        username.setText(snapshot.getValue().toString());
+                                        username2.setText(String.format("@%s", snapshot.getValue().toString()));
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                                DatabaseReference imageurl2=databaseReference.child(keykey).child(key2).child("imageurl");
+                                 imageurl2.addListenerForSingleValueEvent(new ValueEventListener() {
+                                     @Override
+                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                         Picasso.get().load(snapshot.getValue().toString()).transform(new CropCircleTransformation()).fit().into(imageView);
+                                     }
+
+                                     @Override
+                                     public void onCancelled(@NonNull DatabaseError error) {
+
+                                     }
+                                 });
                             }
                         }
 

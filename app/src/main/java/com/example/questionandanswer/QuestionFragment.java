@@ -26,6 +26,7 @@ import java.util.List;
 
 public class QuestionFragment extends Fragment {
     SwipeRefreshLayout refreshLayout;
+    public static final String TAG="Value";
     RecyclerView recyclerview;
     HomeQuestionAdapter questionAdapter;
     List<MyQuestion> myQuestions=new ArrayList<>();
@@ -41,18 +42,13 @@ public class QuestionFragment extends Fragment {
         recyclerview=view.findViewById(R.id.all_question_Recycleview);
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerview.setHasFixedSize(true);
-        refreshLayout=view.findViewById(R.id.refreshswipe);
         questionAdapter=new HomeQuestionAdapter(myQuestions,getContext());
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                questionAdapter.notifyDataSetChanged();
-            }
-        });
+
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("Question");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                myQuestions.clear();
               for (DataSnapshot dataSnapshot:snapshot.getChildren()){
                 for (DataSnapshot snapshot1:dataSnapshot.getChildren()){
                    MyQuestion myQuestion=snapshot1.getValue(MyQuestion.class);
@@ -60,8 +56,8 @@ public class QuestionFragment extends Fragment {
                 }
               }
               recyclerview.setAdapter(questionAdapter);
+              questionAdapter.notifyDataSetChanged();
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

@@ -8,8 +8,10 @@ public class MyQuestion {
     String imageurl;
     String username;
     String token;
+    String answersize;
 
-    public MyQuestion(String question, String time, String type, String imageurl, String username,String token) {
+
+    public MyQuestion(String question, String time, String type, String imageurl, String username,String token,String answersize) {
 
         this.Question = question;
         this.Time = time;
@@ -17,6 +19,8 @@ public class MyQuestion {
         this.imageurl = imageurl;
         this.username = username;
         this.token=token;
+        this.answersize=answersize;
+
     }
 public MyQuestion(){
 
@@ -69,4 +73,13 @@ public MyQuestion(){
     public void setToken(String token) {
         this.token = token;
     }
+
+    public String getAnswersize() {
+        return answersize;
+    }
+
+    public void setAnswersize(String answersize) {
+        this.answersize = answersize;
+    }
+
 }

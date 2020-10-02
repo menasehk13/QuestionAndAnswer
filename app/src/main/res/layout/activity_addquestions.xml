@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
+            android:textColor="@android:color/white"
             android:id="@+id/addnewquestion"
             android:layout_width="match_parent"
             android:layout_height="90dp"
@@ -26,7 +27,10 @@
             android:layout_marginBottom="12dp"
             android:background="@android:color/transparent"
             android:importantForAutofill="no"
-            android:inputType="text"
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:maxLines="10"
+            android:minLines="6"
             android:paddingStart="12dp"
             tools:ignore="LabelFor,RtlSymmetry" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -42,6 +46,7 @@
         app:layout_constraintTop_toBottomOf="@id/textinput"
         android:background="@drawable/edit_text_box">
         <EditText
+            android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="23dp"
@@ -50,7 +55,7 @@
             android:id="@+id/type_Add"
             android:background="@android:color/transparent"
             android:importantForAutofill="no"
-            android:inputType="text"
+            android:inputType="textMultiLine"
             tools:ignore="LabelFor" />
     </com.google.android.material.textfield.TextInputLayout>
     <Button

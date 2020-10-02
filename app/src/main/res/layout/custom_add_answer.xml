@@ -1,65 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="370dp"
+    android:layout_gravity="center_horizontal"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <LinearLayout
+
+    <androidx.cardview.widget.CardView
+        android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageView
+        app:cardBackgroundColor="#797474"
+        app:cardCornerRadius="42dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="9dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/small_cirlce"
-            android:layout_marginStart="5dp"
-            android:id="@+id/answered_image"
-            android:layout_gravity="center_vertical"
-            tools:ignore="ContentDescription" />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="Answer"
-                android:inputType="textMultiLine"
-                android:maxLines="5"
-                android:singleLine="false"
-                android:textAlignment="center"
-                android:id="@+id/answer"
-                tools:ignore="TextViewEdits" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/black"/>
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="username"
-                    android:id="@+id/answer_user"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/time"
-                    android:layout_marginStart="105dp"
-                    android:id="@+id/time_oftheanswer"/>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+                android:layout_marginStart="12dp"
+                android:orientation="horizontal">
 
-</androidx.cardview.widget.CardView>
+                <ImageView
+                    android:layout_width="74dp"
+                    android:layout_height="72dp"
+                    android:id="@+id/answered_image"
+                    android:background="@drawable/small_cirlce"
+                    tools:ignore="ContentDescription" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="12dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/answer_user"                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:text="@string/name"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/answer_user2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/name"
+                        android:textColor="@android:color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:paddingStart="15dp"
+                android:id="@+id/answer"
+                android:textSize="18sp"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:text="answer"
+                android:textColor="@android:color/white"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

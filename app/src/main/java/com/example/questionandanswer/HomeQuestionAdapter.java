@@ -1,7 +1,11 @@
 package com.example.questionandanswer;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.cardview.widget.CardView;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -36,21 +43,20 @@ public class HomeQuestionAdapter extends RecyclerView.Adapter<HomeQuestionAdapte
     @Override
     public void onBindViewHolder(@NonNull final viewadapter holder, int position) {
         holder.question.setText(list.get(position).getQuestion());
-        holder.type.setText(list.get(position).getType());
-        holder.time.setText(list.get(position).getTime());
         holder.username.setText(list.get(position).getUsername());
-        Picasso.get().load(list.get(position).getImageurl()).transform(new CropCircleTransformation()).fit().into(holder.imageView);
-        holder.question.setOnClickListener(new View.OnClickListener() {
+        holder.size.setText(list.get(position).getAnswersize());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
                 String quest=holder.question.getText().toString();
-                String typenew=holder.type.getText().toString();
-                String timeadded=holder.time.getText().toString();
                 Intent intent=new Intent(view.getContext(),Addanswer.class);
                 intent.putExtra("Questiion",quest);
-                intent.putExtra("Type",typenew);
-                intent.putExtra("Time",timeadded);
-                view.getContext().startActivity(intent);
+                Pair[] pairs=new Pair[2];
+                pairs[0]=new Pair<View,String>(holder.cardView,"cardview");
+                pairs[1]=new Pair<View,String>(holder.question,"questiontrns");
+                ActivityOptions options=ActivityOptions.makeSceneTransitionAnimation((Activity) view.getContext(),pairs);
+                view.getContext().startActivity(intent,options.toBundle());
             }
         });
     }
@@ -65,14 +71,14 @@ public class HomeQuestionAdapter extends RecyclerView.Adapter<HomeQuestionAdapte
 
     public class viewadapter extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView question,type,username,time;
+        CardView cardView;
+        TextView question,size,username,time;
         public viewadapter(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.view_profile_pic);
             question=itemView.findViewById(R.id.question_ofuser);
-            type=itemView.findViewById(R.id.question_type);
             username=itemView.findViewById(R.id.question_username);
-            time=itemView.findViewById(R.id.question_addedtime);
+            cardView=itemView.findViewById(R.id.cardviewtrans);
+            size=itemView.findViewById(R.id.answer_size);
         }
     }
 }

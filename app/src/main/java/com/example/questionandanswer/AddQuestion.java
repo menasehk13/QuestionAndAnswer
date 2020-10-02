@@ -29,7 +29,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class AddQuestion extends AppCompatActivity implements View.OnClickListener {
     EditText questionadd,type;
     Button addquestion;
-    String question,typeadd,time,username,imageurl,token;
+    String question,typeadd,time,username,imageurl,token,answersize,answerseen;
     SweetAlertDialog alertDialog;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,7 +63,9 @@ public class AddQuestion extends AppCompatActivity implements View.OnClickListen
                imageurl=documentSnapshot.get("ImageUrl").toString();
                token=documentSnapshot.get("token").toString();
                DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference("Question").child(user);
-             MyQuestion myQuestion=new MyQuestion(question,time,typeadd,imageurl,username,token);
+               answersize="0";
+               answerseen="0";
+             MyQuestion myQuestion=new MyQuestion(question,time,typeadd,imageurl,username,token,answersize);
              String id=databaseReference.push().getKey();
              databaseReference.child(id).setValue(myQuestion).addOnCompleteListener(new OnCompleteListener<Void>() {
                  @Override

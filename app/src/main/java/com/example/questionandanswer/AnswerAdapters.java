@@ -1,5 +1,6 @@
 package com.example.questionandanswer;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,11 +35,12 @@ public class AnswerAdapters extends RecyclerView.Adapter<AnswerAdapters.viewhold
         return new viewholder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
     holder.answer.setText(answerDetails.get(position).getAnswer());
     holder.username.setText(answerDetails.get(position).getUsername());
-    holder.timeofanswer.setText(answerDetails.get(position).getTime());
+    holder.username2.setText("@"+answerDetails.get(position).getUsername());
         Picasso.get().load(answerDetails.get(position).getImageurl()).transform(new CropCircleTransformation()).fit().into(holder.imageView);
     }
 
@@ -52,14 +54,14 @@ public class AnswerAdapters extends RecyclerView.Adapter<AnswerAdapters.viewhold
 
     public class viewholder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView answer,username,timeofanswer;
+        TextView answer,username,username2;
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.answered_image);
             answer=itemView.findViewById(R.id.answer);
             username=itemView.findViewById(R.id.answer_user);
-            timeofanswer=itemView.findViewById(R.id.time_oftheanswer);
+            username2=itemView.findViewById(R.id.answer_user2);
         }
     }
 }

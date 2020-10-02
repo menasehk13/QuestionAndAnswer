@@ -36,20 +36,14 @@ public class MyQuestionViewAdapter extends RecyclerView.Adapter<MyQuestionViewAd
     @Override
     public void onBindViewHolder(@NonNull final viewholder holder, int position) {
      holder.question.setText(myQuestions.get(position).getQuestion());
-     holder.type.setText(myQuestions.get(position).getType());
-     holder.time.setText(myQuestions.get(position).getTime());
      holder.username.setText(myQuestions.get(position).getUsername());
-        Picasso.get().load(myQuestions.get(position).getImageurl()).transform(new CropCircleTransformation()).fit().into(holder.imageView);
+     holder.answersize.setText(myQuestions.get(position).getAnswersize());
         holder.question.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                  String quest=holder.question.getText().toString();
-                 String typenew=holder.type.getText().toString();
-                 String timeadded=holder.time.getText().toString();
                 Intent intent=new Intent(view.getContext(),AnswerView.class);
                 intent.putExtra("Questiion",quest);
-                intent.putExtra("Type",typenew);
-                intent.putExtra("Time",timeadded);
                 view.getContext().startActivity(intent);
             }
         });
@@ -65,14 +59,12 @@ public class MyQuestionViewAdapter extends RecyclerView.Adapter<MyQuestionViewAd
 
     public class viewholder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView question,type,username,time;
+        TextView question,type,username,answersize;
         public viewholder(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.view_profile_pic);
             question=itemView.findViewById(R.id.question_ofuser);
-            type=itemView.findViewById(R.id.question_type);
             username=itemView.findViewById(R.id.question_username);
-            time=itemView.findViewById(R.id.question_addedtime);
+            answersize=itemView.findViewById(R.id.answer_size);
         }
     }
 }

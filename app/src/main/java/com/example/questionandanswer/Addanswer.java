@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +31,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -39,24 +41,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Addanswer extends AppCompatActivity {
-    TextView questionof,time,type;
+    TextView questionof,name,name2,size,seen;
     Button send;
     EditText addanswer;
     RecyclerView recyclerView;
+    ImageView prof;
     List<AnswerDetail> answerDetails=new ArrayList<>();
     AnswerAdapters answerAdapters;
+    String answersizeof;
     String uid;
     String key;
     String user;
     String imageurl;
     String keyof;
-    String Token;
+    String Token,username,userimage;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     FirebaseAuth auth;
@@ -67,19 +72,21 @@ public class Addanswer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answeradd);
         questionof = findViewById(R.id.question_oftoanswer);
-        time = findViewById(R.id.time_ofquestion);
-        type = findViewById(R.id.type_question);
         addanswer = findViewById(R.id.addanswer);
+        name=findViewById(R.id.usernameofquestion1);
+        name2=findViewById(R.id.usernameofquestion2);
+        size=findViewById(R.id.answersize);
+        seen=findViewById(R.id.seensize);
+        prof=findViewById(R.id.image_oftheselectedquestion);
         recyclerView = findViewById(R.id.addanswer_Recycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setHasFixedSize(false);
         send = findViewById(R.id.button_send);
+        size.setText(String.valueOf(answerDetails.size()));
         final String ques = getIntent().getStringExtra("Questiion");
         final String timequestion = getIntent().getStringExtra("Time");
         final String typequestion = getIntent().getStringExtra("Type");
         questionof.setText(ques);
-        time.setText(timequestion);
-        type.setText(typequestion);
         auth=FirebaseAuth.getInstance();
         user=auth.getCurrentUser().getUid();
         firebaseDatabase=FirebaseDatabase.getInstance();
@@ -96,6 +103,37 @@ public class Addanswer extends AppCompatActivity {
                             for (DataSnapshot snapshot3:snapshot.getChildren()){
                                 String key2=snapshot3.getKey();
                                 DatabaseReference databaseReference4=databaseReference.child(keykey).child(key2).child("Answer");
+                                DatabaseReference nameof=databaseReference.child(keykey).child(key2).child("username");
+                                DatabaseReference imageurl=databaseReference.child(keykey).child(key2).child("imageurl");
+                                final DatabaseReference answersize=databaseReference.child(keykey).child(key2).child("answersize");
+                                imageurl.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        userimage=snapshot.getValue().toString();
+                                        Picasso.get().load(userimage).transform(new CropCircleTransformation()).fit().into(prof);
+                                        Log.d(TAG, "onDataImage: "+userimage);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                                nameof.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        username=snapshot.getValue().toString();
+                                        Log.d(TAG, "onDataname: "+username);
+                                        name.setText(username);
+                                        name2.setText("@"+username);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+
                                 databaseReference4.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -103,6 +141,10 @@ public class Addanswer extends AppCompatActivity {
                                       for (DataSnapshot dataSnapshot:snapshot.getChildren()){
                                           AnswerDetail answerDetail=dataSnapshot.getValue(AnswerDetail.class);
                                          answerDetails.add(answerDetail);
+                                          Log.d(TAG, "onDataSize: "+answerDetails.size());
+                                          answersizeof=String.valueOf(answerDetails.size());
+                                          size.setText(answersizeof);
+                                          answersize.setValue(answersizeof);
                                       }
                                       answerAdapters=new AnswerAdapters(answerDetails,getApplicationContext());
                                       recyclerView.setAdapter(answerAdapters);
@@ -114,6 +156,7 @@ public class Addanswer extends AppCompatActivity {
 
                                     }
                                 });
+
                             }
                         }
 
@@ -130,15 +173,14 @@ public class Addanswer extends AppCompatActivity {
 
             }
         });
+
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 InputMethodManager inputManager = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);
-
-
                 inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
-                        InputMethodManager.HIDE_NOT_ALWAYS);
+                        InputMethodManager.HIDE_IMPLICIT_ONLY);
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -163,6 +205,19 @@ public class Addanswer extends AppCompatActivity {
 
                                             }
                                         });
+
+                                        DatabaseReference imageurl=databaseReference.child(key).child(innerkey).child("imageurl");
+                                        imageurl.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                userimage=snapshot.getValue().toString();
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
                                         DocumentReference documentReference=FirebaseFirestore.getInstance().collection("Users").document(user);
                                         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                             @Override
@@ -176,6 +231,8 @@ public class Addanswer extends AppCompatActivity {
                                                     if (answer.isEmpty()){
                                                         addanswer.setError("Please Add your Answer");
                                                         addanswer.setFocusable(true);
+                                                        send.setClickable(false);
+                                                        return;
                                                     }
                                                     timeofanswer=DateFormat.getDateInstance().format(Calendar.getInstance().getTime());
                                                    DatabaseReference databaseReference2=databaseReference.child(key).child(innerkey).child("Answer");
@@ -187,7 +244,8 @@ public class Addanswer extends AppCompatActivity {
                                                         if (task.isSuccessful()){
                                                             Toast.makeText(Addanswer.this, "Added Answer", Toast.LENGTH_SHORT).show();
                                                             addanswer.getText().clear();
-                                                            SendChatNotification(Token,typequestion,answer);
+                                                            String title=ques;
+                                                            SendChatNotification(Token,title,answer);
                                                         }
                                                        }
                                                    });
@@ -211,6 +269,7 @@ public class Addanswer extends AppCompatActivity {
 
                     }
                 });
+
             }
         });
 

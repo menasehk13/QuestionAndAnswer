@@ -4,12 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#03223E"
     tools:context=".QuestionFragment">
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/refreshswipe"
-    android:layout_marginTop="5dp">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -18,5 +14,4 @@
             android:layout_height="wrap_content"
             android:id="@+id/all_question_Recycleview"/>
     </ScrollView>
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

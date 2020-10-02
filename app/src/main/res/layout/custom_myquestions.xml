@@ -1,84 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="9dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:background="@drawable/edit_text_box"
-    android:layout_margin="12dp">
-<ImageView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/small_cirlce"
-    android:id="@+id/view_profile_pic"
-   android:layout_margin="10dp"
-    android:layout_gravity="center_vertical"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginEnd="12dp">
-        <TextView
+        app:cardBackgroundColor="#C319154E"
+        android:id="@+id/cardviewtrans"
+        app:cardCornerRadius="40dp"
+
+        android:transitionName="cardview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="9dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/name"
-            android:id="@+id/question_username"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="center_horizontal"/>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="13dp"
-            app:hintEnabled="true"
-            android:padding="5dp"
-            android:hint="@string/question"
-            app:startIconDrawable="@drawable/ic_baseline_menu_book_24"
+            android:orientation="vertical"
             >
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_width="289dp"
+                android:layout_height="wrap_content"
                 android:text="@string/question"
-                android:paddingStart="3dp"
+                android:transitionName="questiontrns"
                 android:id="@+id/question_ofuser"
-                android:maxLength="100"
-                android:ellipsize="end"
-                tools:ignore="RtlSymmetry" />
-        </com.google.android.material.textfield.TextInputLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <com.google.android.material.textfield.TextInputLayout
+                android:textSize="24sp"
+                android:textColor="@android:color/white"/>
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/type"
-                android:layout_marginBottom="12dp"
-                android:textColorHint="@android:color/black">
+                android:orientation="horizontal"
+                android:layout_marginStart="15dp">
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/type"
-                    android:maxLength="14"
-                    android:id="@+id/question_type"
-                    android:ellipsize="end"/>
-            </com.google.android.material.textfield.TextInputLayout>
-            <com.google.android.material.textfield.TextInputLayout
+                    android:textSize="10sp"
+                    android:textColor="@android:color/white"
+                    android:text="Question By"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:text="username"
+                    android:transitionName="username"
+                    android:id="@+id/question_username"
+                    android:textColor="@android:color/white"
+                    android:layout_marginStart="5dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/time"
-                android:layout_marginBottom="12dp"
-                android:textColorHint="@android:color/black">
+                android:orientation="horizontal"
+                android:layout_marginStart="20dp"
+                >
                 <TextView
-                    android:layout_width="130dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/time"
-                    android:id="@+id/question_addedtime"
-                    android:maxLength="14"
-                    android:ellipsize="end"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:textSize="15sp"
+                    android:textColor="@android:color/white"
+                    android:text="0"
+                    android:id="@+id/answer_size"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_baseline_message_24"/>
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
-</LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
