@@ -76,7 +76,7 @@ public class Addanswer extends AppCompatActivity {
         name=findViewById(R.id.usernameofquestion1);
         name2=findViewById(R.id.usernameofquestion2);
         size=findViewById(R.id.answersize);
-        seen=findViewById(R.id.seensize);
+
         prof=findViewById(R.id.image_oftheselectedquestion);
         recyclerView = findViewById(R.id.addanswer_Recycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));

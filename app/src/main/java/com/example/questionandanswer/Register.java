@@ -187,6 +187,7 @@ String token;
                                                              public void onClick(SweetAlertDialog sweetAlertDialog) {
                                                                  startActivity(new Intent(getApplicationContext(),Viewpager.class));
                                                                  finish();
+
                                                              }
                                                          });
 

@@ -25,7 +25,12 @@
     <string name="default_notification_channel_id">1234</string>
     <string name="channel_name">Android</string>
     <string name="Questionand">Question and Answer</string>
+    <string name="intro2">You Can Ask Your Question By Clicking the add button. The button enables you to write your Question and "-> " clickable button.
+    Once You click the send arrow your question will be automatically send for other Users registered on the app.</string>
     <string name="intro1">You will use this app to ask educational questions and get Answers form either student or Teachers.
     </string>
+    <string name="intro3">In the room you add answer to any question raised by members. Under every questions there is place provided for room members to give answer to the question.
+    Your answer will directly go only to the questioner as a notification.</string>
+    <string name="intro4">A notification will be send to You when room members add an answer to your question. Dont forget to check your phone notification bar.</string>
 
 </resources>

@@ -18,15 +18,17 @@
     android:id="@+id/textinput1"
     android:hint="@string/email"
     android:background="@drawable/edit_text_box">
+
     <EditText
+        android:id="@+id/email"
+        style="@style/Widget.AppCompat.EditText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:inputType="textEmailAddress"
-        android:textStyle="bold"
-        style="@style/Widget.AppCompat.EditText"
         android:background="@android:color/transparent"
-        android:id="@+id/email"
         android:importantForAutofill="no"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+        android:textStyle="bold"
         tools:ignore="LabelFor" />
 </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -42,15 +44,17 @@
         android:id="@+id/textinput2"
         android:hint="@string/password"
         android:background="@drawable/edit_text_box">
+
         <EditText
+            android:id="@+id/password"
+            style="@style/Widget.AppCompat.EditText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textPassword"
-            android:textStyle="bold"
-            style="@style/Widget.AppCompat.EditText"
             android:background="@android:color/transparent"
-            android:id="@+id/password"
             android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textStyle="bold"
             tools:ignore="LabelFor" />
     </com.google.android.material.textfield.TextInputLayout>
     <Button

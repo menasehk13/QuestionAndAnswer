@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity android:name=".Viewpager"></activity>
+        <activity android:name=".Viewpager">
+
+        </activity>
 
         <service
             android:name=".MyFirebaseService"
@@ -21,7 +23,9 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Register"></activity>
+        <activity android:name=".Register">
+
+        </activity>
         <activity
             android:name=".Addanswer"
             android:windowSoftInputMode="stateVisible|adjustResize"></activity>
@@ -33,6 +37,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".MainActivity"></activity>
 

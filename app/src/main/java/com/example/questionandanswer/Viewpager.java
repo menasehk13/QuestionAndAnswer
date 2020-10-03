@@ -21,7 +21,7 @@ public class Viewpager extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewpager);
-        getSupportActionBar().hide();
+
         tabLayout = findViewById(R.id.tabs);
         skip=findViewById(R.id.skip);
         next=findViewById(R.id.next);
@@ -76,8 +76,9 @@ public class Viewpager extends AppCompatActivity {
     }
     private void starthomeactivity() {
         prefmang.setFirstTimeLaunch(false);
-        Intent intent=new Intent(getApplicationContext(),Login.class);
+        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
+        finish();
     }
     private int getItem(int i) {
         return pager.getCurrentItem() + i;
