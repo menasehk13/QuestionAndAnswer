@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class Viewpager extends AppCompatActivity {
     TabLayout tabLayout;
@@ -16,7 +18,8 @@ public class Viewpager extends AppCompatActivity {
     ViewPager pager;
     ViewpageAdapter viewpageAdapter;
     Prefmang prefmang;
-
+    FirebaseAuth firebaseAuth;
+    FirebaseUser user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,12 @@ public class Viewpager extends AppCompatActivity {
         viewpageAdapter = new ViewpageAdapter(getApplicationContext());
         pager.setAdapter(viewpageAdapter);
         tabLayout.setupWithViewPager(pager);
+firebaseAuth=FirebaseAuth.getInstance();
+user=firebaseAuth.getCurrentUser();
+if (user!=null){
+    startActivity(new Intent(getApplicationContext(),MainActivity.class));
+    finish();
+}
         prefmang = new Prefmang(getApplicationContext());
         if (!prefmang.FirstLaunch()){
             starthomeactivity();
@@ -76,7 +85,7 @@ public class Viewpager extends AppCompatActivity {
     }
     private void starthomeactivity() {
         prefmang.setFirstTimeLaunch(false);
-        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
+        Intent intent=new Intent(getApplicationContext(),PhoneVerification.class);
         startActivity(intent);
         finish();
     }

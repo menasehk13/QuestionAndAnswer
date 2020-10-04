@@ -45,4 +45,10 @@ BottomNavigationView navigationView;
      transaction.commit();
      return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 }

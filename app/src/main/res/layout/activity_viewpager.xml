@@ -21,8 +21,8 @@
         app:layout_constraintBottom_toTopOf="@+id/skip"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:tabGravity="center"
+        app:tabBackground="@drawable/tab_layou_indicator"
         app:tabIndicatorHeight="0dp"
         />
     <Button

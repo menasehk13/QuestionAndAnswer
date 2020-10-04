@@ -3,11 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="#83FB8C00"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
     <androidx.cardview.widget.CardView
+        app:cardBackgroundColor="#83FB8C00"
         android:layout_width="408dp"
         android:layout_height="407dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -6,12 +6,11 @@
     android:orientation="vertical"
     android:background="#03223E"
     tools:context=".QuestionFragment">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:scrollbarStyle="insideInset"
             android:id="@+id/all_question_Recycleview"/>
-    </ScrollView>
+
 </LinearLayout>

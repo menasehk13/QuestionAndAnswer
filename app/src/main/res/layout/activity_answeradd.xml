@@ -9,18 +9,15 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_height="192dp"
         android:transitionName="cardview"
         app:cardBackgroundColor="#19154E"
-        app:cardElevation="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/scroll"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="392dp"
+            android:layout_width="395dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
@@ -35,18 +32,17 @@
                 tools:ignore="ContentDescription" />
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="281dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="12dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_marginStart="5dp"
                     android:id="@+id/usernameofquestion1"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
+                    android:layout_marginStart="5dp"
                     android:text="@string/name"
                     android:textColor="@android:color/white"
                     android:textSize="18sp"
@@ -56,67 +52,72 @@
                     android:id="@+id/usernameofquestion2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/name"
                     android:layout_marginStart="5dp"
+                    android:text="@string/name"
                     android:textColor="@android:color/white"
                     android:textSize="12sp" />
 
                 <TextView
+
                     android:id="@+id/question_oftoanswer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="15dp"
+                    android:lines="4"
                     android:maxLines="10"
                     android:minLines="4"
-                    android:padding="5dp"
-                    android:lines="4"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="8dp"
                     android:scrollbarStyle="insideInset"
                     android:scrollbars="vertical"
                     android:text="@string/question"
                     android:textColor="@android:color/white"
-                    android:textSize="19sp"
+                    android:textSize="16sp"
                     android:transitionName="questiontrns" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="12dp">
+                    android:layout_gravity="bottom">
 
-                    <TextView
-                        android:id="@+id/answersize"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:text="0"
-                        android:textColor="@android:color/white" />
+                        android:layout_marginStart="12dp"
+                        android:orientation="horizontal">
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_message_24"
-                        tools:ignore="ContentDescription" />
-                </LinearLayout>
+                        <TextView
+                            android:id="@+id/answersize"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textColor="@android:color/white" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_baseline_message_24"
+                            tools:ignore="ContentDescription" />
+                    </LinearLayout>
+                </RelativeLayout>
+
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <ScrollView
-        android:id="@+id/scroll"
-        android:layout_width="0dp"
-        android:layout_height="409dp"
-        app:layout_constraintBottom_toTopOf="@id/layout_chatbox"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/addanswer_Recycle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#919FF4" />
-    </ScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/addanswer_Recycle"
+        android:layout_width="match_parent"
+        android:layout_height="412dp"
+        android:layout_marginTop="5dp"
+        android:background="#919FF4"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/layout_chatbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     <LinearLayout
         android:id="@+id/layout_chatbox"

@@ -72,7 +72,7 @@ Button logout;
                   alertDialog.setConfirmButton("SignUp", new SweetAlertDialog.OnSweetClickListener() {
                       @Override
                       public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        startActivity(new Intent(getContext(),Login.class));
+                        startActivity(new Intent(getContext(),PhoneVerification.class));
                         getActivity().finish();
                       }
                   });
@@ -91,7 +91,7 @@ Button logout;
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
                         auth.signOut();
-                        startActivity(new Intent(getContext(),Login.class));
+                        startActivity(new Intent(getContext(),PhoneVerification.class));
                     }
                 });
                 sweetAlertDialog2.setCancelButton("Canel", new SweetAlertDialog.OnSweetClickListener() {

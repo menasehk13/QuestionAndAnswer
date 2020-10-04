@@ -43,6 +43,7 @@ public class AnswerView extends AppCompatActivity {
         imageView=findViewById(R.id.imagefor);
         username=findViewById(R.id.username1);
         username2=findViewById(R.id.username2);
+        count_answer=findViewById(R.id.answersize);
         question.setText(quest);
         recyclerView=findViewById(R.id.recycle_answer);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -71,6 +72,18 @@ public class AnswerView extends AppCompatActivity {
                                         answerAdapters=new AnswerAdapters(answerDetailList,getApplicationContext());
                                         recyclerView.setAdapter(answerAdapters);
                                         answerAdapters.notifyDataSetChanged();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
+                                DatabaseReference answeradded=databaseReference.child(keykey).child(key2).child("answersize");
+                                answeradded.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        count_answer.setText(snapshot.getValue().toString());
                                     }
 
                                     @Override

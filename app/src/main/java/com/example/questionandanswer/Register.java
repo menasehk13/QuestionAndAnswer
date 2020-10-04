@@ -47,9 +47,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
 
 public class Register extends AppCompatActivity {
-TextInputEditText firstname,lastname,email,password,birthdate;
+TextInputEditText firstname,lastname,email,birthdate;
 RadioButton male,femlae;
 Button register;
 ImageView profile;
@@ -71,7 +72,6 @@ String token;
         firstname=findViewById(R.id.firstname);
         lastname=findViewById(R.id.Lastname);
         email=findViewById(R.id.emailinput);
-        password=findViewById(R.id.passwordnew);
         birthdate=findViewById(R.id.date);
         profile=findViewById(R.id.image_view);
         male=findViewById(R.id.male);
@@ -124,11 +124,10 @@ String token;
                     sweetAlertDialog.setTitle("Uploading Information Please Wiat");
                     sweetAlertDialog.changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
                     sweetAlertDialog.show();
-                    final String fname, lname, memail, mpass, mbirthdate, mgender;
+                    final String fname, lname, memail, mbirthdate, mgender;
                     fname = firstname.getText().toString().trim();
                     lname = lastname.getText().toString().trim();
                     memail = email.getText().toString();
-                    mpass = password.getText().toString();
                     mbirthdate = birthdate.getText().toString();
                     int getselctedid=group.getCheckedRadioButtonId();
                     RadioButton radioButton=findViewById(getselctedid);
@@ -140,10 +139,9 @@ String token;
                         lastname.setFocusable(true);
                         return;
                     }
-                    if (memail.isEmpty() && mpass.isEmpty() && mpass.length() < 8) {
+                    if (memail.isEmpty()) {
                         email.setError("Please Enter Your Email ");
                         email.setFocusable(true);
-                        password.setError("Enter Passward ...Password must be Greater than 8 ");
                         return;
                     }
                     if (mbirthdate.isEmpty()) {
@@ -151,10 +149,6 @@ String token;
                         birthdate.setFocusable(true);
 
                     }
-                    auth.createUserWithEmailAndPassword(memail, mpass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
                                 final String userId = auth.getCurrentUser().getUid();
                                storageReference=storage.getReference().child("Users Profile Picture"+System.currentTimeMillis()+"."+getDataExtenssion(uri));
                                storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -167,7 +161,9 @@ String token;
                                            @Override
                                            public void onSuccess(Uri uri) {
                                              String imageurl;
+                                             String Phone;
                                              imageurl=uri.toString();
+                                             Phone=getIntent().getExtras().getString("PhoneOfUser");
                                              reference=firebaseFirestore.collection("Users").document(userId);
                                                Map<String,Object> map=new HashMap<>();
                                                map.put("FirstName",fname);
@@ -177,6 +173,7 @@ String token;
                                                map.put("Gender",mgender);
                                                map.put("ImageUrl",imageurl);
                                                map.put("token",token);
+                                               map.put("Phone",Phone);
                                                reference.set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                    @Override
                                                    public void onComplete(@NonNull Task<Void> task) {
@@ -211,9 +208,9 @@ String token;
                                    }
                                });
 
-                            }
-                        }
-                    });
+
+
+
                 }else{
                     Toast.makeText(Register.this, "Please select an image", Toast.LENGTH_SHORT).show();
                 }
@@ -229,7 +226,7 @@ String token;
             try {
                 Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                 profile.setImageBitmap(bitmap);
-                Picasso.get().load(uri).fit().into(profile);
+                Picasso.get().load(uri).transform(new CropCircleTransformation()).fit().into(profile);
             } catch (IOException e) {
                 e.printStackTrace();
             }

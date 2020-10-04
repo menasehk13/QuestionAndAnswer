@@ -9,10 +9,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="#C319154E"
+        app:cardBackgroundColor="#19154E"
         android:id="@+id/cardviewtrans"
         app:cardCornerRadius="40dp"
-
         android:transitionName="cardview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +31,7 @@
                 android:text="@string/question"
                 android:transitionName="questiontrns"
                 android:id="@+id/question_ofuser"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:textColor="@android:color/white"/>
             <LinearLayout
                 android:layout_width="wrap_content"
